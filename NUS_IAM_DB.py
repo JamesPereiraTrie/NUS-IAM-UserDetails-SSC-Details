@@ -220,22 +220,14 @@ projectVersions = getAllProjectVersions(connStrMYSQL)
 allusers, LDAPUsersToID = getAllUsers(connStrMYSQL)
 
 dl_list = ['Fortify Users', 'Admins']
-dl_members = {}  # main dictionary keyed by username
+dl_members = {} 
 
 server = Server(LDAP_SERVER, get_info=ALL)
 ldap_conn = Connection(server, user=USER_DN, password=PASSWORD, auto_bind=True)
 
 for dl in dl_list:
     members = get_ldap_group_members(dl, ldap_conn)
-    dl_members[dl] = members  # merge into main dictionary
-
-
-# for version in projectVersions:
-#     print(f"Processing {version}")
-#     usersInApplication = setAllUsersToApplicationVersions(conn, version, allusers, dl_members, LDAPUsersToID)
-#     print(projectVersions[version])
-#     print(usersInApplication)
-#     print(f"Completed...")
+    dl_members[dl] = members
 
 all_rows = []
 
